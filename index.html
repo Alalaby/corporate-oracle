@@ -1,0 +1,427 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#09090f">
+<title>The Corporate Oracle™</title>
+<style>
+:root {
+  --bg:#09090f; --panel:#141421; --pink:#ff3cac;
+  --blue:#55d6ff; --purple:#9b7bff; --red:#ff4757;
+  --text:#f5f3ff; --muted:#9996b5;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0; min-height:100vh; color:var(--text);
+  background:radial-gradient(ellipse at 50% 5%,#27204a 0%,var(--bg) 58%);
+  font-family:system-ui,-apple-system,sans-serif;
+  text-align:center; padding:24px 16px 35px;
+}
+main { max-width:560px; margin:auto; }
+.tag {
+  display:inline-block; border:1px solid #ff3cac88;
+  color:var(--pink); border-radius:30px; padding:6px 12px;
+  font-size:10px; font-weight:900; letter-spacing:2px;
+}
+h1 {
+  font-size:clamp(35px,9vw,58px); line-height:.98;
+  letter-spacing:-2px; margin:18px 0 10px;
+  font-weight:1000;
+}
+h1 span {
+  display:block; color:var(--pink);
+  text-shadow:0 0 25px #ff3cac55;
+}
+.subtitle { color:var(--muted); font-size:14px; line-height:1.6; }
+.warning {
+  border:1px solid #ff475744; background:#ff47570c;
+  color:#ff8992; border-radius:10px; padding:11px;
+  font-size:11px; margin:22px 0; letter-spacing:.4px;
+}
+.ball-wrap { margin:25px auto 18px; width:220px; max-width:65vw; }
+.ball {
+  width:100%; aspect-ratio:1; border-radius:50%;
+  background:radial-gradient(circle at 32% 25%,#454555,#15151d 48%,#050507 78%);
+  box-shadow:0 0 0 5px #22212f,0 0 0 7px #57516b,
+  0 0 45px #9b7bff35,inset -12px -15px 25px #000;
+  display:grid; place-items:center; position:relative;
+}
+.ball.shaking { animation:shake .65s ease-in-out; }
+@keyframes shake {
+  0%,100% {transform:rotate(0) translate(0)}
+  15% {transform:rotate(-13deg) translate(-9px,2px)}
+  30% {transform:rotate(14deg) translate(8px,-4px)}
+  45% {transform:rotate(-17deg) translate(-8px,3px)}
+  60% {transform:rotate(12deg) translate(8px,2px)}
+  75% {transform:rotate(-7deg) translate(-4px,-2px)}
+}
+.window {
+  width:48%; aspect-ratio:1; border-radius:50%;
+  background:radial-gradient(circle at 40% 35%,#222b62,#080c28 75%);
+  border:3px solid #62627a; display:grid; place-items:center;
+  padding:10px; box-shadow:inset 0 0 20px #000;
+}
+.eight { font-size:65px; font-weight:900; color:white; }
+#question {
+  width:100%; padding:16px; border-radius:12px;
+  background:#141421; border:1px solid #39344f;
+  color:white; font:inherit; font-size:15px; outline:none;
+}
+#question:focus { border-color:var(--pink); }
+#question::placeholder { color:#77748d; }
+button {
+  font:inherit; font-weight:900; cursor:pointer;
+  border:0; border-radius:10px; padding:15px 18px;
+  transition:transform .15s,filter .15s;
+}
+button:active { transform:scale(.97); }
+button:disabled { opacity:.5; cursor:wait; }
+.primary {
+  width:100%; margin-top:12px; color:#100815;
+  background:linear-gradient(100deg,var(--pink),#ff7a76,var(--purple));
+  box-shadow:0 6px 24px #ff3cac25; letter-spacing:1px;
+}
+.small-buttons { display:flex; gap:9px; margin-top:10px; }
+.secondary {
+  flex:1; color:var(--blue); background:#55d6ff0e;
+  border:1px solid #55d6ff44; font-size:12px;
+  padding:12px 7px;
+}
+#result {
+  min-height:185px; margin-top:22px; padding:22px 18px;
+  border:1px solid #9b7bff55; border-radius:16px;
+  background:linear-gradient(145deg,#171426,#101019);
+  display:flex; flex-direction:column; justify-content:center;
+  box-shadow:0 0 35px #9b7bff0c;
+}
+#result.reveal { animation:reveal .4s ease-out; }
+@keyframes reveal {
+  from {opacity:0;transform:scale(.96)}
+  to {opacity:1;transform:scale(1)}
+}
+#status {
+  color:var(--blue); font-size:10px; font-weight:900;
+  letter-spacing:2px; margin-bottom:13px;
+}
+#answer { font-size:clamp(22px,5.5vw,30px); font-weight:950; line-height:1.15; }
+#detail { color:var(--muted); font-size:13px; line-height:1.5; margin-top:12px; }
+.meta { color:#6c6885; font-size:10px; margin-top:17px; }
+.section {
+  margin-top:30px; padding:18px; text-align:left;
+  background:#141421a8; border:1px solid #29263d; border-radius:14px;
+}
+.section h2 { font-size:13px; letter-spacing:1px; margin:0 0 12px; }
+.modes { display:flex; flex-wrap:wrap; gap:7px; }
+.mode {
+  color:#c4bfdc; background:#211e32; border:1px solid #39334e;
+  padding:9px 11px; font-size:11px; border-radius:30px;
+}
+.mode.active { color:#fff; background:#8e40ad; border-color:var(--pink); }
+.switch-row {
+  display:flex; align-items:center; justify-content:space-between;
+  gap:12px; margin-top:15px; font-size:12px;
+}
+.switch-row input { width:20px; height:20px; accent-color:var(--pink); }
+#history { font-size:12px; color:var(--muted); line-height:1.8; }
+#history div { border-bottom:1px solid #29263d; padding:8px 0; }
+footer { color:#66627d; font-size:10px; line-height:1.8; margin:28px auto 0; }
+footer strong { color:#a39bbd; }
+</style>
+</head>
+<body>
+<main>
+  <div class="tag">✦ ENTERPRISE DECISION INTELLIGENCE ✦</div>
+  <h1>THE CORPORATE <span>ORACLE™</span></h1>
+  <div class="subtitle">
+    Enterprise-grade answers to questions nobody has the authority
+    to answer.<br>
+    Powered by vibes, governance and weaponised ambiguity.
+  </div>
+
+  <div class="warning">
+    ⚠ UNVALIDATED INSIGHTS · ZERO ACCOUNTABILITY · 100% CONFIDENCE
+  </div>
+
+  <div class="ball-wrap">
+    <div class="ball" id="ball">
+      <div class="window"><div class="eight">8</div></div>
+    </div>
+  </div>
+
+  <input id="question" maxlength="220"
+    placeholder="Ask the question your steering committee won't..."
+    aria-label="Your question">
+  <button class="primary" id="shake">SHAKE FOR STRATEGIC INSIGHTS ↗</button>
+
+  <div class="small-buttons">
+    <button class="secondary" id="copy">▣ COPY TO CLIPBOARD</button>
+    <button class="secondary" id="clear">↻ RESET THE FRAMEWORK</button>
+  </div>
+
+  <section id="result" aria-live="polite">
+    <div id="status">AWAITING EXECUTIVE SPONSORSHIP</div>
+    <div id="answer">Your answer is in another meeting.</div>
+    <div id="detail">Please submit your question through the appropriate governance channels. There are at least six.</div>
+  </section>
+  <div class="meta">CONFIDENCE: UNREASONABLY HIGH · ACCOUNTABILITY: NOT FOUND</div>
+
+  <section class="section">
+    <h2>⚙ SELECT YOUR OPERATING MODEL</h2>
+    <div class="modes" id="modes">
+      <button class="mode active" data-mode="all">☠ TOTAL CHAOS</button>
+      <button class="mode" data-mode="agile">🏃 AGILE HELL</button>
+      <button class="mode" data-mode="leadership">👔 LEADERSHIP</button>
+      <button class="mode" data-mode="governance">📋 GOVERNANCE</button>
+      <button class="mode" data-mode="delivery">🚨 DELIVERY</button>
+      <button class="mode" data-mode="hr">🫠 PEOPLE & CULTURE</button>
+      <button class="mode" data-mode="consulting">💸 CONSULTANT MODE</button>
+      <button class="mode" data-mode="fincrime">🕵 FINCRIME</button>
+    </div>
+    <label class="switch-row">
+      <span>MAXIMUM FERAL MODE (unhinged answers)</span>
+      <input id="feral" type="checkbox" checked>
+    </label>
+    <label class="switch-row">
+      <span>EXECUTIVE MODE (more words, less meaning)</span>
+      <input id="exec" type="checkbox">
+    </label>
+  </section>
+
+  <section class="section">
+    <h2>📉 RECENT STRATEGIC OUTCOMES</h2>
+    <div id="history">No decisions recorded. The governance committee is devastated.</div>
+  </section>
+
+  <footer>
+    THE CORPORATE ORACLE™ · VERSION 0.0.1 (MVP)<br>
+    <strong>DISCLAIMER:</strong> This platform does not provide advice,
+    solutions, clarity or measurable value. It facilitates the perception
+    of all four.<br>
+    Any resemblance to your workplace is a failure of imagination.
+    Please raise it as a risk.
+  </footer>
+</main>
+
+<script>
+const answers = [
+["all","The timeline remains aspirational.","Delivery confidence is high, provided we redefine delivery, time and confidence."],
+["all","Ownership is being socialised.","Accountability remains firmly embedded in the operating model. Unfortunately, the operating model is you."],
+["all","We need to take this offline.","The offline discussion will generate three meetings, two action logs and absolutely no decision."],
+["all","Let's circle back when the dust settles.","The dust is now a permanent feature of the operating environment."],
+["all","This is an opportunity to demonstrate resilience.","The system is on fire. Leadership has requested a lessons-learned workshop before approving the extinguisher."],
+["all","The data tells a compelling story.","Unfortunately, the data has been on annual leave since the last transformation."],
+["all","We are pivoting towards a future-ready paradigm.","Nobody knows what we're doing, but the slide deck has gradients."],
+["all","This is not a failure. It's an emergent learning opportunity.","The post-implementation review has been pre-populated with the word 'learnings'."],
+["all","Your concerns have been acknowledged.","They have been entered into a spreadsheet that nobody will ever open again."],
+["all","The outcome is directionally positive.","We have no evidence, but the vibes are green."],
+["all","We have achieved alignment in principle.","In practice, four executives have four different interpretations of the principle."],
+["all","The benefits realisation journey is ongoing.","The benefits are missing. We have established a community of practice to find them."],
+["all","We are solutioning at pace.","We have renamed the problem and given it a Jira epic."],
+["all","The operating model is evolving.","Nobody knows who owns anything. Everyone has a RACI."],
+["all","Let's not boil the ocean.","We will instead boil a small pond in six parallel workstreams."],
+["all","The strategy is clear.","The strategy is a 74-slide deck with no verbs."],
+["all","We need to be comfortable with ambiguity.","The ambiguity has been promoted to Senior Manager."],
+["all","We have a robust plan.","It relies on three people who are already on leave."],
+["all","This requires a mindset shift.","We have booked a workshop. Bring sticky notes and suppress your instincts."],
+["all","The dependency is being actively managed.","The dependency owner has left the organisation."],
+["all","We are unlocking synergies.","Two teams have been merged. Their combined output is one spreadsheet."],
+["all","We need to right-size our expectations.","The deadline stays. The resources go. This is called optimisation."],
+["all","The answer is nuanced.","It is no, but with enough caveats to survive a steering committee."],
+["all","The path forward is clear.","We are walking confidently into an undocumented dependency."],
+["all","We are operating within tolerances.","The tolerance is doing an extraordinary amount of emotional labour."],
+["all","We need to leverage our collective intelligence.","One person will do the work. Eleven people will edit the font."],
+["all","The framework is fit for purpose.","The purpose has changed seven times since the framework was approved."],
+["all","We are embracing the art of the possible.","The possible has been deprioritised in favour of the mandatory."],
+["all","We have a clear line of sight.","It ends at a PowerPoint slide titled 'Future State'."],
+["all","The decision is pending further insight.","The insight is pending budget. The budget is pending a decision."],
+
+["agile","The sprint is committed. Reality is not.","Velocity is a lagging indicator of how badly we guessed."],
+["agile","We need to refine the backlog.","The backlog has achieved sentience and is requesting annual leave."],
+["agile","Let's take it into the next sprint.","The next sprint has filed a restraining order."],
+["agile","The retrospective identified improvement opportunities.","We will repeat all the same mistakes with a new Miro board."],
+["agile","The team is empowered to self-organise.","The team has organised itself into a support group."],
+["agile","We are agile in name and waterfall in spirit.","The release plan has been signed in triplicate by the Department of Hope."],
+["agile","We need a spike to investigate.","The spike will take two sprints and produce a document titled 'Further Discovery Required'."],
+["agile","The blocker is being escalated.","The blocker has now been promoted to programme-level blocker."],
+
+["leadership","Leadership is aligned.","They have aligned on the need for another alignment session."],
+["leadership","The executive sponsor is comfortable with the risk.","The executive sponsor has not read the risk register."],
+["leadership","We have full leadership support.","Support is enthusiastic, verbal and completely unresourced."],
+["leadership","The vision is compelling.","The vision has been cascaded to everyone except the people doing the work."],
+["leadership","This is a strategic priority.","There are 19 other strategic priorities ranked above it."],
+["leadership","We need to lead with influence.","You have authority over nothing and accountability for everything."],
+
+["governance","The risk is within appetite.","The appetite belongs to someone who will never experience the consequences."],
+["governance","The control environment is maturing.","We have moved from undocumented chaos to documented chaos."],
+["governance","We need a governance checkpoint.","The project must now seek permission to seek permission."],
+["governance","The audit trail is being strengthened.","We have documented the decision to defer documenting the decision."],
+["governance","This is a low residual risk.","The inherent risk has been reclassified as a stakeholder perception."],
+["governance","The change is within scope.","The scope was changed yesterday. The baseline is from last Tuesday."],
+
+["delivery","We remain confident in the delivery date.","The date has been tattooed onto the roadmap. The roadmap is fictional."],
+["delivery","The critical path is being optimised.","We have removed the people who knew how it worked."],
+["delivery","We are tracking to plan.","The plan has been quietly edited to match reality."],
+["delivery","We are experiencing minor headwinds.","The project is underwater. The status report is green."],
+["delivery","The release is technically ready.","The only remaining issue is that it doesn't work."],
+["delivery","We are managing scope dynamically.","Every request is urgent. Every resource is unavailable."],
+
+["hr","We value psychological safety.","Please provide your honest feedback in a meeting chaired by the person you're criticising."],
+["hr","We are building a high-performance culture.","Burnout has been rebranded as a capability uplift."],
+["hr","Your feedback is important to us.","It will be stored in a talent platform and never mentioned again."],
+["hr","We believe in work-life balance.","Work has achieved balance by occupying both sides."],
+["hr","We are investing in our people.","The investment is a webinar and a branded water bottle."],
+["hr","We encourage constructive challenge.","Please challenge constructively, privately, and without affecting anyone's feelings."],
+
+["consulting","We recommend a discovery phase.","We will spend six months establishing what you already told us."],
+["consulting","Our proprietary framework indicates a clear opportunity.","Our proprietary framework is a flowchart we made on Tuesday."],
+["consulting","We can unlock value at scale.","We can invoice at scale. The value remains theoretical."],
+["consulting","Further analysis is required.","We have successfully monetised not knowing."],
+["consulting","We recommend a centre of excellence.","We will create a committee to decide what excellence means."],
+["consulting","The target state is transformational.","The current state has been renamed 'legacy' to make it sound worse."],
+
+["fincrime","The customer risk model is performing as expected.","The model has identified 400,000 high-risk customers. The dashboard is green."],
+["fincrime","The KYC uplift is progressing to plan.","The plan has been uplifted to accommodate the uplift."],
+["fincrime","The control is operating effectively.","The evidence of effectiveness is pending remediation of the evidence process."],
+["fincrime","The regulatory deadline is achievable.","We have escalated the deadline to the deadline governance forum."],
+["fincrime","We have a single source of truth.","It disagrees with the other three single sources of truth."],
+["fincrime","The backlog uplift is under control.","The backlog is now a strategic asset with its own steering committee."],
+["fincrime","We are reducing false positives.","We have reclassified the positives as opportunities for further investigation."],
+["fincrime","The remediation is substantially complete.","The remaining 2% represents 94% of the complexity."]
+];
+
+const rare = [
+["THE ORACLE HAS ESCALATED ITSELF.","The system has detected a governance vacuum and appointed itself accountable executive."],
+["YOUR QUESTION HAS BEEN DEFERRED INDEFINITELY.","A working group has been established to define the conditions under which deferral may be reconsidered."],
+["THE CEO HAS JOINED THE CHAT.","All previous decisions are now subject to retrospective interpretation."],
+["THE BUSINESS CASE HAS ACHIEVED CONSCIOUSNESS.","It is requesting more funding and refusing to disclose its assumptions."],
+["EVERYONE IS ACCOUNTABLE. NO ONE IS RESPONSIBLE.","The operating model has reached its final form."],
+["THE TRANSFORMATION IS COMPLETE.","Nothing has changed, but the programme has been closed and the benefits have been realised on paper."]
+];
+
+const extras = [
+"Stakeholder alignment has been achieved in the absence of stakeholder understanding.",
+"The action is assigned to the group mailbox. The group mailbox has resigned.",
+"An executive decision has been made to defer the executive decision.",
+"The KPI is green because nobody has refreshed the dashboard.",
+"The meeting has been extended to protect the integrity of the meeting.",
+"Success criteria will be finalised once success has been achieved.",
+"The lessons learned have been converted into lessons ignored.",
+"Resource capacity is theoretically available in a parallel universe.",
+"The issue is not a problem until it appears in the executive pack.",
+"The committee has requested a pre-read for the meeting to plan the pre-read.",
+"All parties agree that something must be done by someone.",
+"The dependency has been moved to a separate spreadsheet for visibility.",
+"We are not failing. We are generating actionable evidence of failure.",
+"The business has confirmed the requirement. The requirement has since changed.",
+"The plan is achievable if nothing unexpected happens, including work."
+];
+
+let mode="all", last=-1, history=[];
+
+const $ = id => document.getElementById(id);
+const ball=$("ball"), shake=$("shake"), result=$("result");
+
+function pickAnswer() {
+  let pool=answers.filter(a=>mode==="all" || a[0]===mode);
+  if ($("feral").checked) {
+    pool=pool.concat(extras.map(t=>[mode,t,"The corporate operating model has reviewed this outcome and found it entirely consistent with existing dysfunction."]));
+  }
+  let item;
+  if (Math.random()<0.055 && $("feral").checked) {
+    const r=rare[Math.floor(Math.random()*rare.length)];
+    item=[mode,r[0],r[1]];
+  } else {
+    let index;
+    do { index=Math.floor(Math.random()*pool.length); } while(index===last && pool.length>1);
+    last=index;
+    item=pool[index];
+  }
+  return item;
+}
+
+function ask() {
+  if (shake.disabled) return;
+  shake.disabled=true;
+  shake.textContent="CONSULTING THE ENTERPRISE FRAMEWORK...";
+  $("status").textContent="ANALYSING STRATEGIC VIBES";
+  $("answer").textContent="Engaging cross-functional stakeholders...";
+  $("detail").textContent="Please remain calm. Your question has been assigned a reference number.";
+  ball.classList.remove("shaking");
+  void ball.offsetWidth;
+  ball.classList.add("shaking");
+
+  const q=$("question").value.trim() || "The meaning of corporate existence";
+  const delay=$("feral").checked ? 1250 : 800;
+
+  setTimeout(()=>{
+    const item=pickAnswer();
+    $("status").textContent=Math.random()<.5
+      ?"EXECUTIVE GUIDANCE · CLASSIFIED"
+      :"STRATEGIC OUTCOME · NON-BINDING";
+    $("answer").textContent=item[1];
+    $("detail").textContent=$("exec").checked
+      ?item[2]+" Accordingly, we recommend a targeted alignment intervention to facilitate sustainable value realisation."
+      :item[2];
+    result.classList.remove("reveal");
+    void result.offsetWidth;
+    result.classList.add("reveal");
+    history.unshift({q,answer:item[1]});
+    history=history.slice(0,5);
+    $("history").innerHTML=history.map(h=>
+      "<div><strong>"+escapeHTML(h.answer)+"</strong><br>↳ "+escapeHTML(h.q)+"</div>"
+    ).join("");
+    shake.disabled=false;
+    shake.textContent="SHAKE FOR STRATEGIC INSIGHTS ↗";
+  },delay);
+}
+
+function escapeHTML(s) {
+  return String(s).replace(/[&<>"']/g,c=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  })[c]);
+}
+
+shake.addEventListener("click",ask);
+$("question").addEventListener("keydown",e=>{
+  if(e.key==="Enter") ask();
+});
+
+$("modes").addEventListener("click",e=>{
+  const b=e.target.closest("button[data-mode]");
+  if(!b) return;
+  mode=b.dataset.mode;
+  document.querySelectorAll(".mode").forEach(x=>
+    x.classList.toggle("active",x===b)
+  );
+});
+
+$("clear").addEventListener("click",()=>{
+  $("question").value="";
+  $("status").textContent="AWAITING EXECUTIVE SPONSORSHIP";
+  $("answer").textContent="Your answer is in another meeting.";
+  $("detail").textContent="Please submit your question through the appropriate governance channels. There are at least six.";
+  $("history").textContent="No decisions recorded. The governance committee is devastated.";
+  history=[];
+});
+
+$("copy").addEventListener("click",async()=>{
+  const text="THE CORPORATE ORACLE™\nQuestion: "+($("question").value||"The meaning of corporate existence")+"\nDecision: "+$("answer").textContent+"\n"+$("detail").textContent;
+  try {
+    await navigator.clipboard.writeText(text);
+    $("copy").textContent="COPIED. ALIGNMENT ACHIEVED ✓";
+    setTimeout(()=>$("copy").textContent="▣ COPY TO CLIPBOARD",1800);
+  } catch(e) {
+    const area=document.createElement("textarea");
+    area.value=text; document.body.appendChild(area);
+    area.select();
+    document.execCommand("copy");
+    area.remove();
+    $("copy").textContent="DECISION COPIED ✓";
+    setTimeout(()=>$("copy").textContent="▣ COPY TO CLIPBOARD",1800);
+  }
+});
+</script>
+</body>
+</html>
