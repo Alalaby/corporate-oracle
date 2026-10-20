@@ -11,55 +11,57 @@
 <style>
 :root{--bg:#09090f;--panel:#141421;--pink:#ff3cac;--blue:#55d6ff;--purple:#9b7bff;--red:#ff4757;--text:#f5f3ff;--muted:#a19eba}
 *{box-sizing:border-box}
-body{margin:0;min-height:100vh;color:var(--text);background:radial-gradient(ellipse at 50% 5%,#27204a 0%,var(--bg) 58%) fixed;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;text-align:center;padding:24px 16px 40px}
+body{margin:0;min-height:100vh;color:var(--text);background:radial-gradient(ellipse at 50% 5%,#27204a 0%,var(--bg) 58%) fixed;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;text-align:center;padding:12px 14px 30px}
 body.glitch{animation:glitch .5s steps(2,end)}
 @keyframes glitch{0%{filter:hue-rotate(0)}25%{filter:hue-rotate(90deg) saturate(2);transform:translateX(-4px)}50%{filter:invert(1);transform:translateX(4px)}75%{filter:hue-rotate(200deg);transform:translateX(-2px)}100%{filter:none;transform:none}}
-main{max-width:560px;margin:auto}
-.tag{display:inline-block;border:1px solid #ff3cac88;color:var(--pink);border-radius:30px;padding:6px 12px;font-size:10px;font-weight:800;letter-spacing:2px}
-h1{font-size:clamp(35px,9vw,58px);line-height:.98;letter-spacing:-2px;margin:18px 0 10px;font-weight:900}
-h1 span{display:block;color:var(--pink);text-shadow:0 0 25px #ff3cac55}
-.subtitle{color:var(--muted);font-size:14px;line-height:1.6}
-.warning{border:1px solid #ff475744;background:#ff47570c;color:#ff8992;border-radius:10px;padding:11px;font-size:11px;margin:22px 0;letter-spacing:.4px}
-.ball-wrap{margin:25px auto 18px;width:230px;max-width:65vw}
+main{max-width:520px;margin:auto}
+.tag{display:inline-block;border:1px solid #ff3cac88;color:var(--pink);border-radius:30px;padding:4px 10px;font-size:9px;font-weight:800;letter-spacing:2px}
+h1{font-size:clamp(26px,8vw,40px);line-height:1;letter-spacing:-1.5px;margin:10px 0 4px;font-weight:900}
+h1 span{color:var(--pink);text-shadow:0 0 25px #ff3cac55}
+.subtitle{color:var(--muted);font-size:12px;line-height:1.5}
+.warn{color:#ff8992;font-size:10px;letter-spacing:.5px}
+.ball-wrap{margin:12px auto 6px;width:min(78vw,300px)}
 .ball{width:100%;aspect-ratio:1;border:0;padding:0;border-radius:50%;cursor:pointer;color:inherit;background:radial-gradient(circle at 32% 25%,#454555,#15151d 48%,#050507 78%);box-shadow:0 0 0 5px #22212f,0 0 0 7px #57516b,0 0 45px #9b7bff35,inset -12px -15px 25px #000;display:grid;place-items:center}
-.ball:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.ball:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 .ball.shaking{animation:shake .7s ease-in-out}
 .ball.feral{box-shadow:0 0 0 5px #22212f,0 0 0 7px var(--red),0 0 60px #ff475755,inset -12px -15px 25px #000}
+.ball.rare .window{border-color:var(--red);box-shadow:inset 0 0 20px #000,0 0 30px #ff4757aa}
 @keyframes shake{0%,100%{transform:rotate(0) translate(0)}15%{transform:rotate(-13deg) translate(-9px,2px)}30%{transform:rotate(14deg) translate(8px,-4px)}45%{transform:rotate(-17deg) translate(-8px,3px)}60%{transform:rotate(12deg) translate(8px,2px)}75%{transform:rotate(-7deg) translate(-4px,-2px)}}
-.window{width:52%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 40% 35%,#222b62,#080c28 75%);border:3px solid #62627a;display:grid;place-items:center;padding:8px;box-shadow:inset 0 0 20px #000}
-.verdict{font-size:clamp(11px,3.4vw,15px);font-weight:900;line-height:1.15;letter-spacing:.5px;color:#cfe3ff;text-shadow:0 0 10px #55d6ff88;word-break:break-word}
-.verdict.eight{font-size:62px;color:#fff;text-shadow:none}
-#question{width:100%;padding:16px;border-radius:12px;background:var(--panel);border:1px solid #39344f;color:#fff;font:inherit;font-size:16px}
+.window{width:76%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 40% 35%,#222b62,#080c28 75%);border:3px solid #62627a;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:12% 11%;box-shadow:inset 0 0 20px #000}
+.window.reveal{animation:reveal .4s ease-out}
+.verdict{font-size:9px;font-weight:800;letter-spacing:2px;color:var(--blue)}
+.verdict.eight{font-size:84px;line-height:1;letter-spacing:0;color:#fff}
+.verdict.eight+#answer{display:none}
+#answer{font-weight:800;line-height:1.2;color:#eef2ff;text-shadow:0 0 12px #55d6ff66;overflow-wrap:anywhere}
+@keyframes reveal{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+#result{margin:6px 0 0;padding:0 6px;min-height:4.6em}
+#result.rare #status{color:var(--red)}
+#status{color:var(--blue);font-size:9px;font-weight:800;letter-spacing:2px;margin-bottom:4px}
+#detail{color:var(--muted);font-size:13px;line-height:1.4}
+.meta{color:#8a86a5;font-size:10px;line-height:1.5;margin:4px 0 10px}
+#question{width:100%;padding:13px;border-radius:12px;background:var(--panel);border:1px solid #39344f;color:#fff;font:inherit;font-size:16px}
 #question:focus{border-color:var(--pink)}
 #question::placeholder{color:#8a87a3}
-button{font:inherit;font-weight:800;cursor:pointer;border:0;border-radius:10px;padding:15px 18px;transition:transform .15s}
+button{font:inherit;font-weight:800;cursor:pointer;border:0;border-radius:10px;transition:transform .15s}
 button:active{transform:scale(.97)}
 button:disabled{opacity:.5;cursor:wait}
-.primary{width:100%;margin-top:12px;color:#100815;background:linear-gradient(100deg,var(--pink),#ff7a76,var(--purple));box-shadow:0 6px 24px #ff3cac25;letter-spacing:1px}
-.small-buttons{display:flex;gap:9px;margin-top:10px}
-.secondary{flex:1;color:var(--blue);background:#55d6ff0e;border:1px solid #55d6ff44;font-size:12px;padding:12px 7px}
-#result{min-height:200px;margin-top:22px;padding:22px 18px;border:1px solid #9b7bff55;border-radius:16px;background:linear-gradient(145deg,#171426,#101019);display:flex;flex-direction:column;justify-content:center;box-shadow:0 0 35px #9b7bff0c}
-#result.reveal{animation:reveal .4s ease-out}
-#result.rare{border-color:var(--red);box-shadow:0 0 40px #ff475733}
-#result.rare #status{color:var(--red)}
-@keyframes reveal{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
-#status{color:var(--blue);font-size:10px;font-weight:800;letter-spacing:2px;margin-bottom:13px}
-#answer{font-size:clamp(22px,5.5vw,30px);font-weight:900;line-height:1.15}
-#detail{color:var(--muted);font-size:14px;line-height:1.5;margin-top:12px}
-.meta{color:#8a86a5;font-size:11px;margin-top:16px;line-height:1.7}
-.meta b{color:#c4bfdc}
-.counter{color:#8a86a5;font-size:11px;margin-top:6px}
-.section{margin-top:30px;padding:18px;text-align:left;background:#141421a8;border:1px solid #29263d;border-radius:14px}
-.section h2{font-size:13px;letter-spacing:1px;margin:0 0 12px}
-.modes{display:flex;flex-wrap:wrap;gap:7px}
-.mode{color:#c4bfdc;background:#211e32;border:1px solid #39334e;padding:9px 11px;font-size:12px;border-radius:30px}
+.primary{width:100%;margin-top:8px;padding:13px;color:#100815;background:linear-gradient(100deg,var(--pink),#ff7a76,var(--purple));box-shadow:0 6px 24px #ff3cac25;letter-spacing:1px}
+.modes{display:flex;gap:6px;overflow-x:auto;margin-top:12px;padding-bottom:4px;scrollbar-width:none}
+.modes::-webkit-scrollbar{display:none}
+.mode{flex:none;color:#c4bfdc;background:#211e32;border:1px solid #39334e;padding:8px 11px;font-size:12px;border-radius:30px}
 .mode.active{color:#fff;background:#8e40ad;border-color:var(--pink)}
-.switch-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:15px;font-size:12px}
-.switch-row input{width:20px;height:20px;accent-color:var(--pink)}
-#history{font-size:12px;color:var(--muted);line-height:1.6}
-#history div{border-bottom:1px solid #29263d;padding:8px 0}
+.toggles{display:flex;gap:6px;margin-top:8px}
+.chip{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;font-size:11px;color:#c4bfdc;background:#211e32;border:1px solid #39334e;border-radius:10px;padding:8px 4px}
+.chip input{width:16px;height:16px;accent-color:var(--pink)}
+.small-buttons{display:flex;gap:6px;margin-top:8px}
+.secondary{flex:1;color:var(--blue);background:#55d6ff0e;border:1px solid #55d6ff44;font-size:11px;padding:9px 6px}
+.section{margin-top:14px;padding:12px 14px;text-align:left;background:#141421a8;border:1px solid #29263d;border-radius:12px}
+.section summary{font-size:12px;font-weight:800;letter-spacing:1px;cursor:pointer}
+#history{font-size:12px;color:var(--muted);line-height:1.6;margin-top:8px}
+#history div{border-bottom:1px solid #29263d;padding:7px 0}
 #history div:last-child{border:0}
-footer{color:#8480a0;font-size:10px;line-height:1.8;margin:28px auto 0}
+.counter{color:#8a86a5;font-size:11px;margin-top:12px}
+footer{color:#8480a0;font-size:10px;line-height:1.7;margin:16px auto 0}
 footer strong{color:#a39bbd}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -68,52 +70,48 @@ footer strong{color:#a39bbd}
 <main>
   <div class="tag">✦ ENTERPRISE DECISION INTELLIGENCE ✦</div>
   <h1>THE CORPORATE <span>ORACLE™</span></h1>
-  <div class="subtitle">Enterprise-grade answers to questions nobody has the authority to answer.<br>Powered by vibes, governance and weaponised ambiguity.</div>
-  <div class="warning">⚠ UNVALIDATED INSIGHTS · ZERO ACCOUNTABILITY · 100% CONFIDENCE</div>
+  <div class="subtitle">Answers to questions nobody has the authority to answer.<br><span class="warn">UNVALIDATED INSIGHTS · ZERO ACCOUNTABILITY · 100% CONFIDENCE</span></div>
 
   <div class="ball-wrap">
-    <button class="ball feral" id="ball" aria-label="Shake the Oracle"><div class="window"><div class="verdict eight" id="verdict">8</div></div></button>
+    <button class="ball feral" id="ball" aria-label="Shake the Oracle"><div class="window" id="win"><div class="verdict eight" id="verdict">8</div><div id="answer">Your answer is in another meeting.</div></div></button>
   </div>
+
+  <section id="result" aria-live="polite">
+    <div id="status">AWAITING EXECUTIVE SPONSORSHIP</div>
+    <div id="detail">Tap the ball, or type a question first. Please submit through the appropriate governance channels. There are at least six.</div>
+  </section>
+  <div class="meta" id="meta">CONFIDENCE: UNREASONABLY HIGH · ACCOUNTABILITY: NOT FOUND</div>
 
   <input id="question" maxlength="220" placeholder="Ask the question your steering committee won't..." aria-label="Your question" autocomplete="off">
   <button class="primary" id="shake">SHAKE FOR STRATEGIC INSIGHTS</button>
 
+  <div class="modes" id="modes">
+    <button class="mode active" data-mode="all">☠ Total chaos</button>
+    <button class="mode" data-mode="agile">🏃 Agile hell</button>
+    <button class="mode" data-mode="leadership">👔 Leadership</button>
+    <button class="mode" data-mode="governance">📋 Governance</button>
+    <button class="mode" data-mode="delivery">🚨 Delivery</button>
+    <button class="mode" data-mode="hr">🫠 People &amp; culture</button>
+    <button class="mode" data-mode="consulting">💸 Consultant</button>
+    <button class="mode" data-mode="fincrime">🕵 FinCrime</button>
+  </div>
+  <div class="toggles">
+    <label class="chip"><input id="feral" type="checkbox" checked> Maximum feral</label>
+    <label class="chip"><input id="exec" type="checkbox"> Executive mode</label>
+  </div>
   <div class="small-buttons">
     <button class="secondary" id="copy">COPY DECISION</button>
     <button class="secondary" id="clear">RESET THE FRAMEWORK</button>
   </div>
 
-  <section id="result" aria-live="polite">
-    <div id="status">AWAITING EXECUTIVE SPONSORSHIP</div>
-    <div id="answer">Your answer is in another meeting.</div>
-    <div id="detail">Please submit your question through the appropriate governance channels. There are at least six.</div>
-  </section>
-  <div class="meta" id="meta">CONFIDENCE: UNREASONABLY HIGH · ACCOUNTABILITY: NOT FOUND</div>
+  <details class="section">
+    <summary>RECENT STRATEGIC OUTCOMES</summary>
+    <div id="history">No decisions recorded. The governance committee is devastated.</div>
+  </details>
   <div class="counter" id="counter"></div>
 
-  <section class="section">
-    <h2>SELECT YOUR OPERATING MODEL</h2>
-    <div class="modes" id="modes">
-      <button class="mode active" data-mode="all">☠ Total chaos</button>
-      <button class="mode" data-mode="agile">🏃 Agile hell</button>
-      <button class="mode" data-mode="leadership">👔 Leadership</button>
-      <button class="mode" data-mode="governance">📋 Governance</button>
-      <button class="mode" data-mode="delivery">🚨 Delivery</button>
-      <button class="mode" data-mode="hr">🫠 People &amp; culture</button>
-      <button class="mode" data-mode="consulting">💸 Consultant</button>
-      <button class="mode" data-mode="fincrime">🕵 FinCrime</button>
-    </div>
-    <label class="switch-row"><span>Maximum feral mode (unhinged answers, rare events)</span><input id="feral" type="checkbox" checked></label>
-    <label class="switch-row"><span>Executive mode (more words, less meaning)</span><input id="exec" type="checkbox"></label>
-  </section>
-
-  <section class="section">
-    <h2>RECENT STRATEGIC OUTCOMES</h2>
-    <div id="history">No decisions recorded. The governance committee is devastated.</div>
-  </section>
-
   <footer>
-    THE CORPORATE ORACLE™ · VERSION 0.1.0 (STILL AN MVP)<br>
+    THE CORPORATE ORACLE™ · VERSION 0.2.0 (STILL AN MVP)<br>
     <strong>DISCLAIMER:</strong> This platform does not provide advice, solutions, clarity or measurable value. It facilitates the perception of all four.<br>
     Any resemblance to your workplace is a failure of imagination. Please raise it as a risk.
   </footer>
@@ -269,6 +267,30 @@ const rareVerdicts=["RESTRUCTURE","MAYDAY","NO.","VIBES","OOPS"];
 const owners=["Group mailbox","The steering committee","Dave (left 2022)","A working group","The programme","Legal, probably","Nobody (formalised)","Whoever replies first","The PMO","Not found"];
 const confidences=["Unreasonably high","Directionally robust","Vibes-based","Green (unverified)","Aspirational","Statistically irrelevant"];
 
+/* ---------- EXTRA FERAL CONTENT ---------- */
+const pick=a=>{const r=rand(a);return{h:r[0],d:r[1]};};
+const roasts=[
+["You didn't ask a question.","Typical stakeholder behaviour. We will proceed on assumptions."],
+["Please articulate a question.","Alternatively, say 'quick one' and we'll schedule 90 minutes."],
+["The silence has been minuted.","Action: you, to think about what you meant."]];
+const nag=[
+["As per my previous answer.","The answer has not changed. Your tolerance for it has."],
+["Asking again will not improve the outcome.","It will improve the number of meetings about the outcome."],
+["I'm going to need you to trust the process.","The process is also me. I have no further comment."],
+["This has been escalated to my manager.","My manager is also me. Please wait."]];
+const late=[
+["Why are you working at this hour?","This has been logged. Not by anyone. Just logged, spiritually."],
+["It's late. The problem will still be here.","It has no concept of weekends. Please log off."]];
+const friday=[
+["Let's park this until Monday.","Monday is when we pretend to have discussed it."],
+["That's a next-week problem.","Next week has been delegated to Future You."]];
+const monday=[
+["Let's not do this before 10am.","Monday is for reading the emails we ignored on Friday."]];
+rare.push(
+["THE ORACLE IS ON ANNUAL LEAVE.","Back in three weeks. For urgent matters please contact the Oracle's Oracle."],
+["MANDATORY FUN HAS BEEN SCHEDULED.","Attendance is voluntary and will be tracked."],
+["THE WIFI IS DOWN. THE ORACLE IS NOW AGILE.","Please stand in a circle and say what you did yesterday."]);
+
 /* ---------- STATE ---------- */
 const $=id=>document.getElementById(id);
 const ball=$("ball"),shake=$("shake"),result=$("result");
@@ -291,12 +313,19 @@ function draw(pool){
   return pool[bag.pop()];
 }
 
-function pickAnswer(q){
-  const feral=$("feral").checked;
-  if(feral&&Math.random()<0.07){const r=rand(rare);return{h:r[0],d:r[1],rare:true};}
+function pickAnswer(q,rep){
+  const feral=$("feral").checked,d=new Date(),h=d.getHours(),day=d.getDay();
+  if(!q&&Math.random()<.7)return pick(roasts);
+  if(rep&&Math.random()<.65)return pick(nag);
+  if(feral&&Math.random()<.08)return{...pick(rare),rare:true};
+  if(feral&&Math.random()<.2){
+    if(h>=21||h<5)return pick(late);
+    if(day===5&&h>=14)return pick(friday);
+    if(day===1&&h<11)return pick(monday);
+  }
   if(q){
     for(const [re,opts] of smart){
-      if(re.test(q)&&Math.random()<0.65){const r=rand(opts);return{h:r[0],d:r[1]};}
+      if(re.test(q)&&Math.random()<0.65)return pick(opts);
     }
   }
   let pool=answers.filter(a=>mode==="all"||a[0]===mode);
@@ -317,36 +346,43 @@ function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",
 function save(){try{localStorage.setItem("oracle-history",JSON.stringify(history));localStorage.setItem("oracle-count",String(count));}catch(e){}}
 
 /* ---------- ASK ---------- */
+let lastQ="",repeats=0,buzz=null;
+const buzzwords=["SYNERGY","LEVERAGE","PIVOT","ALIGN","BANDWIDTH","DISRUPT","SCALE","UPLIFT","ROADMAP","LEARNINGS","VIBES","CASCADE","PARADIGM","DEEP DIVE","CIRCLE BACK","NORTH STAR"];
+function fit(t){const n=t.length;$("answer").style.fontSize=(n<30?19:n<52?16:n<72?14:12.5)+"px";}
 function ask(){
   if(shake.disabled)return;
   shake.disabled=true;
-  shake.textContent="CONSULTING THE ENTERPRISE FRAMEWORK...";
+  shake.textContent="CONSULTING THE FRAMEWORK...";
   $("status").textContent="ANALYSING STRATEGIC VIBES";
-  $("answer").textContent="Engaging cross-functional stakeholders...";
-  $("detail").textContent="Please remain calm. Your question has been assigned a reference number.";
-  result.classList.remove("rare");
-  const v=$("verdict");v.classList.remove("eight");v.textContent="…";
+  $("detail").textContent="Your question has been assigned a reference number.";
+  result.classList.remove("rare");ball.classList.remove("rare");
+  const v=$("verdict"),a=$("answer"),win=$("win");
+  v.classList.remove("eight");v.textContent="PROCESSING";
+  a.style.fontSize="20px";
+  clearInterval(buzz);
+  buzz=setInterval(()=>{a.textContent=rand(buzzwords)},90);
   ball.classList.remove("shaking");void ball.offsetWidth;ball.classList.add("shaking");
   if(navigator.vibrate)try{navigator.vibrate(60)}catch(e){}
 
   const raw=$("question").value.trim();
+  repeats=raw&&raw===lastQ?repeats+1:0;lastQ=raw;
   const q=raw||"The meaning of corporate existence";
   const feral=$("feral").checked;
 
   setTimeout(()=>{
-    const item=pickAnswer(raw);
-    const detail=$("exec").checked?item.d+" Accordingly, we recommend a targeted alignment intervention to facilitate sustainable value realisation.":item.d;
+    clearInterval(buzz);
+    const item=pickAnswer(raw,repeats);
     $("status").textContent=item.rare?"⚠ EXECUTIVE INTERRUPTION":(Math.random()<.5?"EXECUTIVE GUIDANCE · CLASSIFIED":"STRATEGIC OUTCOME · NON-BINDING");
-    $("answer").textContent=item.h;
-    $("detail").textContent=detail;
+    fit(item.h);a.textContent=item.h;
+    $("detail").textContent=$("exec").checked?item.d+" Accordingly, we recommend a targeted alignment intervention to facilitate sustainable value realisation.":item.d;
     v.textContent=item.rare?rand(rareVerdicts):rand(verdicts);
+    ball.classList.toggle("rare",!!item.rare);
     result.classList.toggle("rare",!!item.rare);
-    result.classList.remove("reveal");void result.offsetWidth;result.classList.add("reveal");
+    win.classList.remove("reveal");void win.offsetWidth;win.classList.add("reveal");
     if(item.rare&&feral){document.body.classList.remove("glitch");void document.body.offsetWidth;document.body.classList.add("glitch");}
 
     const ref="ORC-"+new Date().getFullYear()+"-"+String(Math.floor(Math.random()*9000)+1000);
-    lastMeta="Ref "+ref+" · Confidence: "+rand(confidences)+" · Accountable: "+rand(owners);
-    $("meta").textContent=lastMeta;
+    $("meta").textContent="Ref "+ref+" · Confidence: "+rand(confidences)+" · Accountable: "+rand(owners);
 
     count++;
     history.unshift({q,a:item.h});
