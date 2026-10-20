@@ -11,16 +11,17 @@
 <style>
 :root{--bg:#09090f;--panel:#141421;--pink:#ff3cac;--blue:#55d6ff;--purple:#9b7bff;--red:#ff4757;--text:#f5f3ff;--muted:#a19eba}
 *{box-sizing:border-box}
-body{margin:0;min-height:100vh;color:var(--text);background:radial-gradient(ellipse at 50% 5%,#27204a 0%,var(--bg) 58%) fixed;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;text-align:center;padding:12px 14px 30px}
+html{overflow-x:hidden}
+body{margin:0;min-height:100vh;color:var(--text);background:radial-gradient(ellipse at 50% 5%,#27204a 0%,var(--bg) 58%) fixed;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;text-align:center;padding:20px 16px 40px;overflow-x:hidden}
 body.glitch{animation:glitch .5s steps(2,end)}
 @keyframes glitch{0%{filter:hue-rotate(0)}25%{filter:hue-rotate(90deg) saturate(2);transform:translateX(-4px)}50%{filter:invert(1);transform:translateX(4px)}75%{filter:hue-rotate(200deg);transform:translateX(-2px)}100%{filter:none;transform:none}}
 main{max-width:520px;margin:auto}
 .tag{display:inline-block;border:1px solid #ff3cac88;color:var(--pink);border-radius:30px;padding:4px 10px;font-size:9px;font-weight:800;letter-spacing:2px}
-h1{font-size:clamp(26px,8vw,40px);line-height:1;letter-spacing:-1.5px;margin:10px 0 4px;font-weight:900}
+h1{font-size:clamp(26px,8vw,40px);line-height:1;letter-spacing:-1.5px;margin:16px 0 8px;font-weight:900}
 h1 span{color:var(--pink);text-shadow:0 0 25px #ff3cac55}
-.subtitle{color:var(--muted);font-size:12px;line-height:1.5}
+.subtitle{color:var(--muted);font-size:13px;line-height:1.6}
 .warn{color:#ff8992;font-size:10px;letter-spacing:.5px}
-.ball-wrap{margin:12px auto 6px;width:min(78vw,300px)}
+.ball-wrap{margin:22px auto 12px;width:min(78vw,300px)}
 .ball{width:100%;aspect-ratio:1;border:0;padding:0;border-radius:50%;cursor:pointer;color:inherit;background:radial-gradient(circle at 32% 25%,#454555,#15151d 48%,#050507 78%);box-shadow:0 0 0 5px #22212f,0 0 0 7px #57516b,0 0 45px #9b7bff35,inset -12px -15px 25px #000;display:grid;place-items:center}
 .ball:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 .ball.shaking{animation:shake .7s ease-in-out}
@@ -34,28 +35,27 @@ h1 span{color:var(--pink);text-shadow:0 0 25px #ff3cac55}
 .verdict.eight+#answer{display:none}
 #answer{font-weight:800;line-height:1.2;color:#eef2ff;text-shadow:0 0 12px #55d6ff66;overflow-wrap:anywhere}
 @keyframes reveal{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
-#result{margin:6px 0 0;padding:0 6px;min-height:4.6em}
+#result{margin:10px 0 0;padding:0 6px;min-height:5.4em}
 #result.rare #status{color:var(--red)}
 #status{color:var(--blue);font-size:9px;font-weight:800;letter-spacing:2px;margin-bottom:4px}
-#detail{color:var(--muted);font-size:13px;line-height:1.4}
-.meta{color:#8a86a5;font-size:10px;line-height:1.5;margin:4px 0 10px}
-#question{width:100%;padding:13px;border-radius:12px;background:var(--panel);border:1px solid #39344f;color:#fff;font:inherit;font-size:16px}
+#detail{color:var(--muted);font-size:14px;line-height:1.5}
+.meta{color:#8a86a5;font-size:10px;line-height:1.5;margin:8px 0 18px}
+#question{width:100%;padding:16px;border-radius:12px;background:var(--panel);border:1px solid #39344f;color:#fff;font:inherit;font-size:16px}
 #question:focus{border-color:var(--pink)}
 #question::placeholder{color:#8a87a3}
 button{font:inherit;font-weight:800;cursor:pointer;border:0;border-radius:10px;transition:transform .15s}
 button:active{transform:scale(.97)}
 button:disabled{opacity:.5;cursor:wait}
-.primary{width:100%;margin-top:8px;padding:13px;color:#100815;background:linear-gradient(100deg,var(--pink),#ff7a76,var(--purple));box-shadow:0 6px 24px #ff3cac25;letter-spacing:1px}
-.modes{display:flex;gap:6px;overflow-x:auto;margin-top:12px;padding-bottom:4px;scrollbar-width:none}
-.modes::-webkit-scrollbar{display:none}
-.mode{flex:none;color:#c4bfdc;background:#211e32;border:1px solid #39334e;padding:8px 11px;font-size:12px;border-radius:30px}
+.primary{width:100%;margin-top:12px;padding:16px;color:#100815;background:linear-gradient(100deg,var(--pink),#ff7a76,var(--purple));box-shadow:0 6px 24px #ff3cac25;letter-spacing:1px}
+.modes{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:20px}
+.mode{flex:none;color:#c4bfdc;background:#211e32;border:1px solid #39334e;padding:10px 13px;font-size:13px;border-radius:30px}
 .mode.active{color:#fff;background:#8e40ad;border-color:var(--pink)}
-.toggles{display:flex;gap:6px;margin-top:8px}
-.chip{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;font-size:11px;color:#c4bfdc;background:#211e32;border:1px solid #39334e;border-radius:10px;padding:8px 4px}
+.toggles{display:flex;gap:8px;margin-top:14px}
+.chip{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;font-size:12px;color:#c4bfdc;background:#211e32;border:1px solid #39334e;border-radius:10px;padding:12px 6px}
 .chip input{width:16px;height:16px;accent-color:var(--pink)}
-.small-buttons{display:flex;gap:6px;margin-top:8px}
-.secondary{flex:1;color:var(--blue);background:#55d6ff0e;border:1px solid #55d6ff44;font-size:11px;padding:9px 6px}
-.section{margin-top:14px;padding:12px 14px;text-align:left;background:#141421a8;border:1px solid #29263d;border-radius:12px}
+.small-buttons{display:flex;gap:8px;margin-top:12px}
+.secondary{flex:1;color:var(--blue);background:#55d6ff0e;border:1px solid #55d6ff44;font-size:12px;padding:12px 4px}
+.section{margin-top:22px;padding:12px 14px;text-align:left;background:#141421a8;border:1px solid #29263d;border-radius:12px}
 .section summary{font-size:12px;font-weight:800;letter-spacing:1px;cursor:pointer}
 #history{font-size:12px;color:var(--muted);line-height:1.6;margin-top:8px}
 #history div{border-bottom:1px solid #29263d;padding:7px 0}
@@ -63,6 +63,10 @@ button:disabled{opacity:.5;cursor:wait}
 .counter{color:#8a86a5;font-size:11px;margin-top:12px}
 footer{color:#8480a0;font-size:10px;line-height:1.7;margin:16px auto 0}
 footer strong{color:#a39bbd}
+.toast{position:fixed;top:12px;left:50%;transform:translateX(-50%);width:max-content;max-width:90vw;background:#fff;color:#111;padding:11px 15px;border-radius:12px;font-size:13px;font-weight:700;box-shadow:0 10px 40px #000a;z-index:9;animation:toast 3.6s ease forwards}
+@keyframes toast{0%{opacity:0;top:-40px}8%,88%{opacity:1;top:12px}100%{opacity:0;top:-40px}}
+.fx{position:fixed;font-size:26px;pointer-events:none;z-index:8;margin:-13px 0 0 -13px;animation:fx 1.4s ease-out forwards}
+@keyframes fx{to{transform:translate(var(--dx),var(--dy)) rotate(var(--r));opacity:0}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -94,12 +98,14 @@ footer strong{color:#a39bbd}
     <button class="mode" data-mode="hr">🫠 People &amp; culture</button>
     <button class="mode" data-mode="consulting">💸 Consultant</button>
     <button class="mode" data-mode="fincrime">🕵 FinCrime</button>
+    <button class="mode" data-mode="email">📧 Passive-aggressive</button>
   </div>
   <div class="toggles">
     <label class="chip"><input id="feral" type="checkbox" checked> Maximum feral</label>
     <label class="chip"><input id="exec" type="checkbox"> Executive mode</label>
   </div>
   <div class="small-buttons">
+    <button class="secondary" id="esc">🚨 ESCALATE</button>
     <button class="secondary" id="copy">COPY DECISION</button>
     <button class="secondary" id="clear">RESET THE FRAMEWORK</button>
   </div>
@@ -340,10 +346,37 @@ function renderHistory(){
   box.innerHTML=history.map(h=>"<div><strong>"+esc(h.a)+"</strong><br>↳ "+esc(h.q)+"</div>").join("");
 }
 function renderCount(){
-  $("counter").textContent=count?"Decisions generated: "+count+" · Decisions actually made: 0":"";
+  $("counter").textContent=count?"Decisions generated: "+count+" · Decisions actually made: 0"+(miles[count]?" · "+miles[count]:""):"";
 }
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]);}
 function save(){try{localStorage.setItem("oracle-history",JSON.stringify(history));localStorage.setItem("oracle-count",String(count));}catch(e){}}
+
+/* ---------- EFFECTS ---------- */
+answers.push(
+["email","Per my last email.","Which you did not read. Which is in the folder you call 'Later'."],
+["email","Kind regards.","Translation: I am furious and I have copied your manager."],
+["email","Just circling back on this.","I have circled four times. I am now a satellite."],
+["email","Happy to discuss.","I am not happy. We will not discuss. Please just do it."],
+["email","Apologies for the confusion.","There was no confusion. You were wrong. I am being polite."],
+["email","Flagging for visibility.","I am building a paper trail. Please do not look at it directly."],
+["email","As discussed.","We did not discuss. I am retroactively creating consensus."],
+["email","Looping in the right people.","I have copied 40 people. None are the right people."],
+["email","Thanks in advance!","This is not a thank you. This is a legally binding expectation."]);
+const toasts=["💬 Teams: Dave is typing…","📅 'Sync to discuss the sync' starts in 2 minutes","📧 Re: Re: Re: Fwd: URGENT (no action required)","🔔 @channel please see my previous message","⚠️ Your Oracle™ licence expires in 3 days. Please raise a ticket.","📎 Reminder: mandatory training was due yesterday","👀 Your manager viewed your decision","🧑‍💼 A stakeholder has joined the call and is on mute"];
+const titles=["The Corporate Oracle™","(3) Urgent: Action Required","Re: Re: Re: Fwd: Oracle","Meeting in 2 minutes","Your Oracle licence is expiring"];
+const miles={5:"Five decisions. The committee is concerned about your initiative.",10:"Ten decisions. HR has been notified of your productivity.",25:"25 decisions. You are now Acting Senior Manager (unpaid).",50:"50 decisions. Please stop. We are out of governance."};
+function toast(t){const e=document.createElement("div");e.className="toast";e.textContent=t;document.body.appendChild(e);setTimeout(()=>e.remove(),3700);}
+function burst(){
+  const em=["💀","🔥","📉","🫠","🚨","📎","🗓️","☕","🤡","📊"],r=ball.getBoundingClientRect();
+  for(let i=0;i<16;i++){
+    const e=document.createElement("span");e.className="fx";e.textContent=rand(em);
+    e.style.left=(r.left+r.width/2)+"px";e.style.top=(r.top+r.height/2)+"px";
+    e.style.setProperty("--dx",(Math.random()*400-200)+"px");
+    e.style.setProperty("--dy",(Math.random()*-420-40)+"px");
+    e.style.setProperty("--r",(Math.random()*720-360)+"deg");
+    document.body.appendChild(e);setTimeout(()=>e.remove(),1500);
+  }
+}
 
 /* ---------- ASK ---------- */
 let lastQ="",repeats=0,buzz=null;
@@ -388,6 +421,9 @@ function ask(){
     history.unshift({q,a:item.h});
     history=history.slice(0,5);
     save();renderHistory();renderCount();
+    if(feral){if(item.rare||Math.random()<.35)burst();if(Math.random()<.3)toast(rand(toasts));}
+    if(miles[count])toast(miles[count]);
+    document.title=rand(titles);
     shake.disabled=false;
     shake.textContent="SHAKE FOR STRATEGIC INSIGHTS";
   },feral?1250:800);
@@ -429,6 +465,20 @@ $("copy").addEventListener("click",async()=>{
     try{document.execCommand("copy");done("DECISION COPIED ✓");}catch(_){done("COPY FAILED. RAISE A RISK.");}
     area.remove();
   }
+});
+
+const chain=["Team Lead","Senior Manager","Head of Process About Process","Deputy Assistant VP of Escalations","Chief Escalation Officer","The Board","Dave","Legal","The Steering Committee"];
+const ends=["They are on a cruise.","They are 'in transit'.","They are unavailable until Q3.","They replied 'Noted' and nothing else.","They are the problem."];
+$("esc").addEventListener("click",()=>{
+  const p=chain.slice().sort(()=>Math.random()-.5).slice(0,3+Math.floor(Math.random()*3));
+  const t="Escalated to "+p[p.length-1]+".";
+  const v=$("verdict"),a=$("answer"),win=$("win");
+  v.classList.remove("eight");v.textContent="ESCALATED";fit(t);a.textContent=t;
+  $("status").textContent="ESCALATION PATH";
+  $("detail").textContent=p.join(" → ")+". "+rand(ends);
+  win.classList.remove("reveal");void win.offsetWidth;win.classList.add("reveal");
+  ball.classList.remove("shaking");void ball.offsetWidth;ball.classList.add("shaking");
+  burst();toast("🚨 Escalation acknowledged. Estimated response: never.");
 });
 
 /* Shake your actual phone */
